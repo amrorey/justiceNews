@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드 뉴스 소식지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .newsletter {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card h3 {
+            margin: 15px 0 10px;
+            font-size: 1.2em;
+        }
+        .card p {
+            padding: 0 15px 15px;
+            color: #666;
+            font-size: 0.95em;
+        }
+        .btn {
+            display: inline-block;
+            margin: 10px auto 20px;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="newsletter">
+        <!-- 첫 번째 카드 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="뉴스 이미지 1">
+            <h3>소식 제목 1</h3>
+            <p>이곳에 첫 번째 카드 뉴스의 설명을 작성하세요. 간단한 내용을 담을 수 있습니다.</p>
+            <a href="#" class="btn">더 보기</a>
+        </div>
+        <!-- 두 번째 카드 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="뉴스 이미지 2">
+            <h3>소식 제목 2</h3>
+            <p>두 번째 카드 뉴스의 설명을 작성하세요. 강조하고 싶은 내용을 담을 수 있습니다.</p>
+            <a href="#" class="btn">더 보기</a>
+        </div>
+        <!-- 세 번째 카드 -->
+        <div class="card">
+            <img src="https://via.placeholder.com/300x200" alt="뉴스 이미지 3">
+            <h3>소식 제목 3</h3>
+            <p>세 번째 카드 뉴스의 설명을 작성하세요. 중요한 내용을 강조하세요.</p>
+            <a href="#" class="btn">더 보기</a>
+        </div>
+    </div>
+</body>
+</html>

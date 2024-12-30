@@ -1,88 +1,139 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>카드 뉴스 소식지</title>
+    <title>Card News Slider</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            font-family: Arial, sans-serif;
             background-color: #f4f4f4;
+            overflow-x: hidden;
         }
-        .newsletter {
-            max-width: 1200px;
+
+        .slider {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
             margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
             overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .card {
+            min-width: 100%;
+            box-sizing: border-box;
+            background: #fff;
             text-align: center;
-            transition: transform 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-5px);
-        }
+
         .card img {
             width: 100%;
             height: auto;
+            border-bottom: 1px solid #ddd;
         }
-        .card h3 {
-            margin: 15px 0 10px;
-            font-size: 1.2em;
+
+        .card .content {
+            padding: 20px;
         }
-        .card p {
-            padding: 0 15px 15px;
-            color: #666;
-            font-size: 0.95em;
+
+        .card .content h2 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+            color: #333;
         }
-        .btn {
-            display: inline-block;
-            margin: 10px auto 20px;
-            padding: 8px 16px;
-            text-decoration: none;
-            background-color: #007bff;
+
+        .card .content p {
+            margin: 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .navigation button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
             color: #fff;
-            border-radius: 5px;
-            transition: background 0.3s;
+            font-size: 1.5rem;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            outline: none;
         }
-        .btn:hover {
-            background-color: #0056b3;
+
+        .navigation button:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
     </style>
 </head>
 <body>
-    <div class="newsletter">
-        <!-- 첫 번째 카드 -->
-        <div class="card">
-            <img src="img/photo_2024-12-10_09-33-12.jpg" alt="뉴스 이미지 1">
-            <h3>윤석열 퇴진 아침선전전</h3>
-            <p>핵연료 네거리서 아침 선전전 진행</p>
-            <a href="#" class="btn">더 보기</a>
+    <div class="slider">
+        <div class="slides">
+            <div class="card">
+                <img src="img/yuseong.jpg" alt="Slide 1">
+                <div class="content">
+                    <h2>정의당 유성구 위원회 출법</h2>
+                    <p><b>위원장</b> 김은실</p>
+					<p><b>부위원장</b> 김명이,류현희</p>
+					<p><b>운영위원</b> 조성철,강희성,정구철</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="img/photo_2024-12-10_09-33-12.jpg" alt="Slide 2">
+                <div class="content">
+                    <h2>새해인사</h2>
+                    <p>새해인사 내용</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Slide 3">
+                <div class="content">
+                    <h2>Slide 3 Title</h2>
+                    <p>This is the description for Slide 3.</p>
+                </div>
+            </div>
         </div>
-        <!-- 두 번째 카드 -->
-        <div class="card">
-            <img src="img/photo_2024-12-17_17-26-46.jpg" alt="뉴스 이미지 2">
-            <h3>소식 제목 2</h3>
-            <p>대전 시민대회 12-21</p>
-            <a href="#" class="btn">더 보기</a>
-        </div>
-        <!-- 세 번째 카드 -->
-        <div class="card">
-            <img src="img/photo_2024-12-18_12-10-17.jpg" alt="뉴스 이미지 3">
-            <h3>거리미사</h3>
-            <p>세 번째 카드 뉴스의 설명을 작성하세요. 중요한 내용을 강조하세요.</p>
-            <a href="#" class="btn">더 보기</a>
+        <div class="navigation">
+            <button id="prev">&#10094;</button>
+            <button id="next">&#10095;</button>
         </div>
     </div>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let index = 0;
+
+        function showSlide(newIndex) {
+            const totalSlides = document.querySelectorAll('.card').length;
+            if (newIndex < 0) {
+                index = totalSlides - 1;
+            } else if (newIndex >= totalSlides) {
+                index = 0;
+            } else {
+                index = newIndex;
+            }
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => showSlide(index - 1));
+        nextButton.addEventListener('click', () => showSlide(index + 1));
+    </script>
 </body>
 </html>
